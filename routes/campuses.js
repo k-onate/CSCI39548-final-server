@@ -24,9 +24,14 @@ const ash = require('express-async-handler');
 //   }
 // });
 
-/* GET ALL CAMPUSES */
+/* GET ALL CAMPUSES IN ALPHABETICAL ORDER */
 router.get('/', ash(async(req, res) => {
-  let campuses = await Campus.findAll({include: [Student]});  // Get all campuses and their associated students
+  
+  let campuses = await Campus.findAll({
+    include: [Student],
+    order: [['name', 'ASC']] 
+  }); 
+
   res.status(200).json(campuses);  // Status code 200 OK - request succeeded
 }));
 
@@ -65,5 +70,13 @@ router.put('/:id', ash(async(req, res) => {
   res.status(201).json(campus);  // Status code 201 Created - successful creation of a resource
 }))
 
+//shows if campus exists (true) or not
+router.get('/exists/:name', ash(async (req, res) => {
+  console.log("in router");
+  const campusName = req.params.name;
+  console.log("in router, campusName:", campusName)
+  const campus = await Campus.findOne({ where: { name: campusName } });
+  res.status(200).json(!!campus);
+}));
 // Export router, so that it can be imported to construct the apiRouter (app.js)
 module.exports = router;
