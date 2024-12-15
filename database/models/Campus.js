@@ -10,7 +10,8 @@ const db = require('../db');  // Import Sequelize database instance called "db"
 const Campus = db.define("campus", {
   name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: true,
   },
 
   address: {
@@ -19,8 +20,13 @@ const Campus = db.define("campus", {
   },
 
   description: {
+    type: Sequelize.TEXT,
+  },
+
+  campusPhoto: {
     type: Sequelize.STRING,
-  }
+    allowNull: true,
+  },
 });
 
 // Export the campus model
