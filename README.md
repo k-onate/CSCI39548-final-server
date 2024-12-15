@@ -1,4 +1,4 @@
-### server-starter-code
+### server-side-code
 Kevin Onate </br>
-[client-starter-code](https://github.com/k-onate/CSCI39548-final-client)
+[client-side-code](https://github.com/k-onate/CSCI39548-final-client)
 
